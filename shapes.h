@@ -40,18 +40,24 @@ public:
 		//(void)image;
 		// Заглушка. Реализуйте метод самостоятельно
 
-		for (int y = point_.y, y_t = 0; y < size_.height || y_t < texture_.get()->GetSize().height; ++y, ++y_t) {
-			for (int x = point_.x, x_t = 0; x < size_.width||x_t<texture_.get()->GetSize().width; ++x, ++x_t) {
+
+		/*auto a = size_.height;
+		auto b = size_.width;
+		auto c = texture_.get()->GetSize().height;
+		auto d = texture_.get()->GetSize().width;*/
+
+		for (int y = point_.y, y_t = 0; y < size_.height + point_.y; ++y, ++y_t) {
+			for (int x = point_.x, x_t = 0; x < size_.width + point_.x; ++x, ++x_t) {
 				if (type_ == ShapeType::ELLIPSE) {
-					if (IsPointInEllipse({ x,y }, size_)) {
-						image[y][x] = ' ';
+					if (IsPointInEllipse({ x_t,y_t }, size_)) {
+						image[y][x] = texture_.get()->GetPixelColor({ x_t, y_t });
 					}
 					else {
-						image[y][x] = texture_.get()->GetPixelColor({ y_t, x_t });
+						continue;
 					}
 				}
 				else {
-					image[y][x] = texture_.get()->GetPixelColor({ y_t, x_t });
+					image[y][x] = texture_.get()->GetPixelColor({ x_t, y_t });
 				}
 			}
 		}

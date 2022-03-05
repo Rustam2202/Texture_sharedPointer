@@ -9,7 +9,7 @@ public:
 
 	Size GetSize() const {
 		// Заглушка. Реализуйте метод самостоятельно
-		return { (int)image_.size(), (int)image_[0].size() };
+		return { (int)image_[0].size(), (int)image_.size() };
 	}
 
 	char GetPixelColor(Point p) const {
