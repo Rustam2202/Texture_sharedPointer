@@ -47,17 +47,33 @@ public:
 		auto d = texture_.get()->GetSize().width;*/
 
 		for (int y = point_.y, y_t = 0; y < size_.height + point_.y; ++y, ++y_t) {
+			if (y < 0 ) {
+				continue;
+			}
 			for (int x = point_.x, x_t = 0; x < size_.width + point_.x; ++x, ++x_t) {
+				if (x < 0 ) {
+					continue;
+				}
 				if (type_ == ShapeType::ELLIPSE) {
 					if (IsPointInEllipse({ x_t,y_t }, size_)) {
-						image[y][x] = texture_.get()->GetPixelColor({ x_t, y_t });
+						if (texture_.get() == nullptr) {
+							image[y][x] = '.';
+						}
+						else {
+							image[y][x] = texture_.get()->GetPixelColor({ x_t, y_t });
+						}
 					}
 					else {
 						continue;
 					}
 				}
 				else {
-					image[y][x] = texture_.get()->GetPixelColor({ x_t, y_t });
+					if (texture_.get() == nullptr) {
+						image[y][x] = '.';
+					}
+					else {
+						image[y][x] = texture_.get()->GetPixelColor({ x_t, y_t });
+					}
 				}
 			}
 		}
