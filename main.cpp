@@ -39,20 +39,20 @@ void TestCpp() {
     Canvas canvas(Size{77, 17});
 
     // Буква "C" как разность двух эллипсов, один из которых нарисован цветом фона
-    canvas.AddShape(ShapeType::ELLIPSE, {2, 1}, {30, 15},
+    canvas.AddShape(ShapeType::ELLIPSE, {2*5, 1*5}, {30, 15},
                     MakeTextureCheckers({100, 100}, 'c', 'C'));
-   // canvas.Print(output);
-   // cout << output.str();
+    canvas.Print(output);
+    cout << output.str();
 
-    canvas.AddShape(ShapeType::ELLIPSE, {8, 4}, {30, 9}, MakeTextureSolid({100, 100}, ' '));
-   // canvas.Print(output);
-   // cout << output.str();
+    canvas.AddShape(ShapeType::ELLIPSE, {8*5, 4*5}, {30, 9}, MakeTextureSolid({100, 100}, ' '));
+    canvas.Print(output);
+    cout << output.str();
 
     // Горизонтальные чёрточки плюсов
     auto h1 = canvas.AddShape(ShapeType::RECTANGLE, {54, 7}, {22, 3},
                               MakeTextureSolid({100, 100}, '+'));
-   // canvas.Print(output);
-  //  cout << output.str();
+    canvas.Print(output);
+    cout << output.str();
     canvas.DuplicateShape(h1, {30, 7});
 
     // Вертикальные чёрточки плюсов
