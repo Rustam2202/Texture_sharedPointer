@@ -22,7 +22,7 @@ using Image = std::vector<std::string>;
 inline Size GetImageSize(const Image& image) {
     const int width = image.empty() ? 0 : static_cast<int>(image[0].size());
     const int height = static_cast<int>(image.size());
-    return {width, height};
+    return { width, height };
 }
 
 // Проверяет, содержится ли заданная точка в эллипсе заданного размера

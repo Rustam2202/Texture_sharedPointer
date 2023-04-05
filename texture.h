@@ -13,9 +13,13 @@ public:
 	}
 
 	char GetPixelColor(Point p) const {
-		//(void)p;
-		// Заглушка. Реализуйте метод самостоятельно
-		return image_[p.y][p.x];
+		if (p.y < (int)image_.size() && p.x < (int)image_[0].size()) {
+			return image_[p.y][p.x];
+		}
+		else
+		{
+			return '.';
+		}
 	}
 
 private:

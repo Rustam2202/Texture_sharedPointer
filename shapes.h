@@ -37,29 +37,15 @@ public:
 	// должны отображаться с помощью символа точка '.'
 	// Части фигуры, выходящие за границы объекта image, должны отбрасываться.
 	void Draw(Image& image) const {
-		
-		auto a = size_.height;
-		auto b = size_.width;
-		auto c = texture_.get()->GetSize().height;
-		auto d = texture_.get()->GetSize().width;
 
-		int y = point_.y;
-		int y_low = size_.height + point_.y;
-
-		for (int y = point_.y, y_t = 0; y < size_.height + point_.y; ++y, ++y_t) {
+		for (int y = point_.y, y_t = 0; (y < (int)image.size()) && (y < size_.height + point_.y); ++y, ++y_t) {
 			if (y < 0) {
 				continue;
 			}
-			if (y >= size_.height) {
-				break;
-			}
-			for (int x = point_.x, x_t = 0; x < size_.width + point_.x; ++x, ++x_t) {
+			for (int x = point_.x, x_t = 0; (x < (int)image[0].size()) && (x < size_.width + point_.x); ++x, ++x_t) {
 				if (x < 0) {
 					continue;
 				}
-				/*if (x >= size_.width) {
-					break;
-				}*/
 				if (type_ == ShapeType::ELLIPSE) {
 					if (IsPointInEllipse({ x_t,y_t }, size_)) {
 						if (texture_.get() == nullptr) {

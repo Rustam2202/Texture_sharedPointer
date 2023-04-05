@@ -19,7 +19,7 @@ public:
 
     // Добавляет на холст фигуру указанного типа, 
     ShapeId AddShape(ShapeType shape_type, Point position, Size size,
-                     std::shared_ptr<Texture> texture) {
+        std::shared_ptr<Texture> texture) {
         auto shape = std::make_unique<Shape>(shape_type);
         shape->SetPosition(position);
         shape->SetSize(size);

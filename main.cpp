@@ -2,15 +2,15 @@
 #include "shapes.h"
 
 #include <cassert>
-#include <iostream>
+#include<iostream>
 #include <sstream>
 
 std::unique_ptr<Texture> MakeTextureCow() {
-    Image image = {R"(^__^            )",  //
+    Image image = { R"(^__^            )",  //
                    R"((oo)\_______    )",  //
                    R"((__)\       )\/\)",  //
                    R"(    ||----w |   )",  //
-                   R"(    ||     ||   )"};
+                   R"(    ||     ||   )" };
     return std::make_unique<Texture>(move(image));
 }
 
@@ -34,67 +34,59 @@ std::unique_ptr<Texture> MakeTextureCheckers(Size size, char pixel1, char pixel2
 }
 
 void TestCpp() {
-    std::stringstream output;
-
-    Canvas canvas(Size{77, 17});
+    Canvas canvas(Size{ 77, 17 });
 
     // Буква "C" как разность двух эллипсов, один из которых нарисован цветом фона
-    canvas.AddShape(ShapeType::ELLIPSE, {2*5, 1*5}, {30, 15},
-                    MakeTextureCheckers({100, 100}, 'c', 'C'));
-    canvas.Print(output);
-    cout << output.str();
-
-    canvas.AddShape(ShapeType::ELLIPSE, {8*5, 4*5}, {30, 9}, MakeTextureSolid({100, 100}, ' '));
-    canvas.Print(output);
-    cout << output.str();
+    canvas.AddShape(ShapeType::ELLIPSE, { 2, 1 }, { 30, 15 },
+        MakeTextureCheckers({ 100, 100 }, 'c', 'C'));
+    canvas.AddShape(ShapeType::ELLIPSE, { 8, 4 }, { 30, 9 }, MakeTextureSolid({ 100, 100 }, ' '));
 
     // Горизонтальные чёрточки плюсов
-    auto h1 = canvas.AddShape(ShapeType::RECTANGLE, {54, 7}, {22, 3},
-                              MakeTextureSolid({100, 100}, '+'));
-    canvas.Print(output);
-    cout << output.str();
-    canvas.DuplicateShape(h1, {30, 7});
+    auto h1 = canvas.AddShape(ShapeType::RECTANGLE, { 54, 7 }, { 22, 3 },
+        MakeTextureSolid({ 100, 100 }, '+'));
+    canvas.DuplicateShape(h1, { 30, 7 });
 
     // Вертикальные чёрточки плюсов
-    auto v1 = canvas.DuplicateShape(h1, {62, 3});
-    canvas.ResizeShape(v1, {6, 11});
-    canvas.DuplicateShape(v1, {38, 3});
+    auto v1 = canvas.DuplicateShape(h1, { 62, 3 });
+    canvas.ResizeShape(v1, { 6, 11 });
+    canvas.DuplicateShape(v1, { 38, 3 });
 
+    std::stringstream output;
     canvas.Print(output);
-    cout << output.str();
+    std::cout << output.str();
 
     const auto answer
         = "###############################################################################\n"
-          "#                                                                             #\n"
-          "#            cCcCcCcCcC                                                       #\n"
-          "#        CcCcCcCcCcCcCcCcCc                                                   #\n"
-          "#      cCcCcCcCcCcCcCcCcCcCcC          ++++++                  ++++++         #\n"
-          "#    CcCcCcCcCcCc                      ++++++                  ++++++         #\n"
-          "#   CcCcCcCcC                          ++++++                  ++++++         #\n"
-          "#   cCcCcCc                            ++++++                  ++++++         #\n"
-          "#  cCcCcC                      ++++++++++++++++++++++  ++++++++++++++++++++++ #\n"
-          "#  CcCcCc                      ++++++++++++++++++++++  ++++++++++++++++++++++ #\n"
-          "#  cCcCcC                      ++++++++++++++++++++++  ++++++++++++++++++++++ #\n"
-          "#   cCcCcCc                            ++++++                  ++++++         #\n"
-          "#   CcCcCcCcC                          ++++++                  ++++++         #\n"
-          "#    CcCcCcCcCcCc                      ++++++                  ++++++         #\n"
-          "#      cCcCcCcCcCcCcCcCcCcCcC          ++++++                  ++++++         #\n"
-          "#        CcCcCcCcCcCcCcCcCc                                                   #\n"
-          "#            cCcCcCcCcC                                                       #\n"
-          "#                                                                             #\n"
-          "###############################################################################\n";
+        "#                                                                             #\n"
+        "#            cCcCcCcCcC                                                       #\n"
+        "#        CcCcCcCcCcCcCcCcCc                                                   #\n"
+        "#      cCcCcCcCcCcCcCcCcCcCcC          ++++++                  ++++++         #\n"
+        "#    CcCcCcCcCcCc                      ++++++                  ++++++         #\n"
+        "#   CcCcCcCcC                          ++++++                  ++++++         #\n"
+        "#   cCcCcCc                            ++++++                  ++++++         #\n"
+        "#  cCcCcC                      ++++++++++++++++++++++  ++++++++++++++++++++++ #\n"
+        "#  CcCcCc                      ++++++++++++++++++++++  ++++++++++++++++++++++ #\n"
+        "#  cCcCcC                      ++++++++++++++++++++++  ++++++++++++++++++++++ #\n"
+        "#   cCcCcCc                            ++++++                  ++++++         #\n"
+        "#   CcCcCcCcC                          ++++++                  ++++++         #\n"
+        "#    CcCcCcCcCcCc                      ++++++                  ++++++         #\n"
+        "#      cCcCcCcCcCcCcCcCcCcCcC          ++++++                  ++++++         #\n"
+        "#        CcCcCcCcCcCcCcCcCc                                                   #\n"
+        "#            cCcCcCcCcC                                                       #\n"
+        "#                                                                             #\n"
+        "###############################################################################\n";
 
-  //  assert(answer == output.str());
+    assert(answer == output.str());
 }
 
 void TestCow() {
-    Canvas canvas{{18, 5}};
+    Canvas canvas{ {18, 5} };
 
-    canvas.AddShape(ShapeType::RECTANGLE, {1, 0}, {16, 5}, MakeTextureCow());
+    canvas.AddShape(ShapeType::RECTANGLE, { 1, 0 }, { 16, 5 }, MakeTextureCow());
 
     std::stringstream output;
     canvas.Print(output);
-    cout << output.str();
+    std::cout << output.str();
 
     // clang-format off
     // Здесь уместно использовать сырые литералы, т.к. в текстуре есть символы '\'
