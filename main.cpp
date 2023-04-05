@@ -2,6 +2,6 @@
 
 int main() {
 //	TestCow();
-//	TestCpp();
+	TestCpp();
 	TestCppOop();
 }

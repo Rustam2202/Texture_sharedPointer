@@ -3,8 +3,6 @@
 
 #include <memory>
 
-//enum class ShapeType { RECTANGLE, ELLIPSE };
-
 class Shape_OOP {
 public:
 	explicit Shape_OOP() {
@@ -22,20 +20,19 @@ public:
 		size_ = size;
 	}
 
-		void SetTexture(std::shared_ptr<Texture> texture)  {	}
+	void SetTexture(std::shared_ptr<Texture> texture) { texture_ = texture; }
 
-		void Draw(Image& image) const  {	}
+	virtual	void Draw(Image& image) const {}
 
 protected:
-	//	 ShapeType type_;
 	Point point_;
 	Size size_;
-	//	std::shared_ptr<Texture> texture_;
+	std::shared_ptr<Texture> texture_;
 };
 
 class Rectangle : public Shape_OOP {
 public:
-	void Draw(Image& image) const {
+	void Draw(Image& image) const override {
 		for (int y = point_.y, y_t = 0; (y < (int)image.size()) && (y < size_.height + point_.y); ++y, ++y_t) {
 			if (y < 0) {
 				continue;
@@ -53,17 +50,11 @@ public:
 			}
 		}
 	}
-
-	void SetTexture(std::shared_ptr<Texture> texture) {
-		texture_ = texture;
-	}
-private:
-	std::shared_ptr<Texture> texture_;
 };
 
 class Ellipse : public Shape_OOP {
 public:
-	void Draw(Image& image) const {
+	void Draw(Image& image) const override {
 		for (int y = point_.y, y_t = 0; (y < (int)image.size()) && (y < size_.height + point_.y); ++y, ++y_t) {
 			if (y < 0) {
 				continue;
@@ -86,10 +77,4 @@ public:
 			}
 		}
 	}
-
-	void SetTexture(std::shared_ptr<Texture> texture) {
-		texture_ = texture;
-	}
-private:
-	std::shared_ptr<Texture> texture_;
 };

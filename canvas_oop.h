@@ -19,16 +19,6 @@ public:
 		size_ = size;
 	}
 
-	// Добавляет на холст фигуру указанного типа, 
-	//ShapeId AddShape(ShapeType shape_type, Point position, Size size,
-	//    std::shared_ptr<Texture> texture) {
-	//    auto shape = std::make_unique<Shape>(shape_type);
-	//    shape->SetPosition(position);
-	//    shape->SetSize(size);
-	//    shape->SetTexture(std::move(texture));
-	//    return InsertShape(std::move(shape));
-	//}
-
 	ShapeId AddEllipse(Point position, Size size, std::shared_ptr<Texture> texture) {
 		auto shape = std::make_unique <Ellipse>();
 		shape->SetPosition(position);
@@ -42,13 +32,6 @@ public:
 		shape->SetPosition(position);
 		shape->SetSize(size);
 		shape->SetTexture(std::move(texture));
-		return InsertShape(std::move(shape));
-	}
-
-	// Создаёт копию фигуры в новых координатах
-	ShapeId DuplicateShape(ShapeId source_id, Point target_position) {
-		auto shape = std::make_unique<Shape_OOP>(*GetShapeNodeById(source_id)->second);
-		shape->SetPosition(target_position);
 		return InsertShape(std::move(shape));
 	}
 
